@@ -5,7 +5,7 @@ public class MyArrayList<T> implements MyList<T> {
     private int size;
 
     public MyArrayList() {
-        arr = new Object[5]; // Initializing
+        arr = new Object[7]; // Initializing
         size = 0;
     }
 
@@ -14,11 +14,11 @@ public class MyArrayList<T> implements MyList<T> {
         addElement(size, item);
     }
 
-    @Override
-    public void set(int index, T item) {
+    private void addElement(int size, T item) {
         checkIndex(index);
         arr[index] = item;
     }
+
 
     @Override
     public void add(int index, T item) {
@@ -81,9 +81,9 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public void sort() {
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = i + 1; j < size; j++) {
-                if (((Comparable <T>) arr[i]).compareTo((T) arr[j]) > 0) {
+        for ( int i = 0; i < size - 1; i++) {
+            for ( int j = i + 1; j < size; j++) {
+                if ((( Comparable <T>) arr[i]).compareTo((T) arr[j]) > 0) {
                     Object temp = arr[i];
                     arr[i] = arr[j];
                     arr[j] = temp;
@@ -103,7 +103,7 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public int lastIndexOf(Object object) {
-        for (int i = size - 1 ; i >= 0; i--) {
+        for (int i = size - 1 ; i >= 0; i-- )  {
             if (object.equals(arr[i])) {
                 return i;
             }
