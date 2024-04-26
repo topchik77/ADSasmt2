@@ -14,6 +14,12 @@ public class MyArrayList<T> implements MyList<T> {
         addElement(size, item);
     }
 
+    @Override
+    public void set(int index, T item) {
+        checkIndex(index);
+        arr[index] = item;
+    }
+
     private void addElement(int size, T item) {
         checkIndex(index);
         arr[index] = item;
@@ -80,7 +86,7 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     @Override
-    public void sort() {
+    public void sort() {        //bubble sort
         for ( int i = 0; i < size - 1; i++) {
             for ( int j = i + 1; j < size; j++) {
                 if ((( Comparable <T>) arr[i]).compareTo((T) arr[j]) > 0) {
