@@ -1,5 +1,8 @@
 import java.util.Iterator;
-
+/**
+ * A custom implementation of a dynamic array that implements the MyList interface.
+ * It provides methods for adding, removing, and accessing elements, as well as sorting and checking for element existence.
+ */
 public class MyArrayList<T> implements MyList<T> {
     private Object[] arr;
     private int size;

@@ -1,6 +1,10 @@
 import java.util.Iterator;
 
-
+/**
+ * A doubly linked list implementation of the MyList interface. It allows for adding,
+ * removing, and accessing elements in the list, as well as checking for the existence
+ * of an element and getting the size of the list.
+ */
 public class MyLinkedList<T> implements MyList<T> {
     private Node<T> head;
     private Node<T> tail;
