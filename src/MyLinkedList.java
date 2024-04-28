@@ -1,5 +1,4 @@
 import java.util.Iterator;
-
 /**
  * A doubly linked list implementation of the MyList interface. It allows for adding,
  * removing, and accessing elements in the list, as well as checking for the existence
@@ -33,7 +32,6 @@ public class MyLinkedList<T> implements MyList<T> {
         size = 0;
     }
 
-    @Override
     public void addElement(T data) {
         Node<T> newNode = new Node<>(data);
         if (head == null) {
@@ -65,7 +63,7 @@ public class MyLinkedList<T> implements MyList<T> {
         Node<T> current = getNodeAtIndex(index, head);
         current.data = item;
     }
-v
+
 
     @Override
     public void add(int index, T item) {
@@ -144,67 +142,38 @@ v
     
     @Override
     public void remove(int index) {
-        checkIndex(index);
-        if (isEmpty()) {
-            throw new NoSuchElementException("List is empty");
-        }
-        Node<T> target;
         if (index == 0) {
-            target = head;
-            head = head.next;
-            if (head != null) {
-                head.prev = null;
-            } else {
-                tail = null;
-            }
-        } else if (index == size - 1) {
-            target = tail;
-            tail = tail.prev;
-            if (tail != null) {
-                tail.next = null;
-            } else {
-                head = null;
-            }
-        } else {
-            Node<T> current = head;
-            for (int i = 0; i < index; i++) {
-                current = current.next;
-            }
-            target = current;
-            current.prev.next = current.next;
-            current.next.prev = current.prev;
+            removeFirst();
+            return;
         }
+        Node<T> node = getNodeAt(index - 1);
+        node.next = node.next.next;
         size--;
     }
 
     @Override
     public void removeFirst() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("List is empty");
-        }
         head = head.next;
-        if (head != null) {
-            head.prev = null;
-        } else {
-            tail = null;
-        }
         size--;
     }
 
     @Override
     public void removeLast() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("List is empty");
-        }
-        tail = tail.prev;
-        if (tail != null) {
-            tail.next = null;
-        } else {
-            head = null;
-        }
+        Node<T> node = getNodeAt(size - 2);
+        node.next = null;
         size--;
     }
 
+    private Node<T> getNodeAt(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        Node<T> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current;
+    }
 
     @Override
     public void sort() {
@@ -219,10 +188,10 @@ v
             node = head;
 
             while (node.next != null) {
-                if (node.item.compareTo(node.next.item) > 0) {
-                    T t = node.next.item;
-                    node.next.item = node.item;
-                    node.item = t;
+                if (((Comparable<T>) node.data).compareTo(node.next.data) > 0) {
+                    T t = node.next.data;
+                    node.next.data = node.data;
+                    node.data = t;
                     swapped = true;
                 }
                 node = node.next;
@@ -231,16 +200,16 @@ v
     }
 
 
-    @Override
+
     public int size() {
         return size;
     }
-    @Override
+
     public void clear() {
         head = null;
         size = 0;
     }
-    @Override
+
     private boolean isEmpty() {
         return size == 0;
     }
@@ -305,8 +274,4 @@ v
         return -1;
     }
 
-    private class Node<T> {
-        public T data;
-        public MyLinkedList<T>.Node next;
-    }
 }

@@ -23,19 +23,26 @@ public class MyArrayList<T> implements MyList<T> {
         arr[index] = item;
     }
 
-    private void addElement(int size, T item) {
+    private void addElement(int index, T item) {
         checkIndex(index);
+        if(size == arr.length){
+            resize();
+        }
+        for (int i = size; i> index; i--){
+            arr[i] = arr[i-1];
+        }
         arr[index] = item;
+        size++;
     }
 
 
     @Override
     public void add(int index, T item) {
         checkIndexForAdd(index);
-        if (size == arr.length) {
+        if(size == arr.length) {
             resize();
         }
-        for (int i = size; i > index; i--) {
+        for(int i = size; i > index; i--) {
             arr[i] = arr[i - 1];
         }
         arr[index] = item;
@@ -89,13 +96,13 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     @Override
-    public void sort() {        //bubble sort
+    public void sort() {
         for ( int i = 0; i < size - 1; i++) {
-            for ( int j = i + 1; j < size; j++) {
-                if ((( Comparable <T>) arr[i]).compareTo((T) arr[j]) > 0) {
+            for ( int j = 0; j < size - i - 1; j++) {
+                if ((( Comparable<T>) arr[j]).compareTo((T) arr[j+1])> 0) {
                     Object temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
                 }
             }
         }
@@ -155,7 +162,7 @@ public class MyArrayList<T> implements MyList<T> {
         if (index < 0) {
             throw new IndexOutOfBoundsException("index cannot be negative : " + index);
         }
-        if (index >= size) {
+        if (index > size) {
             throw new IndexOutOfBoundsException("index out of bounds for size " + size + " : " + index);
         }
     }
