@@ -20,5 +20,25 @@ public class Main {
         for (int i = 0; i < linkedList.size(); i++) {
             System.out.println(linkedList.get(i));
         }
+
+        MyQueue<Integer> queue = new MyQueue<>();
+        queue.offer(1);
+        queue.offer(2);
+        queue.offer(3);
+        System.out.println("\nqueue size: " + queue.size());
+        System.out.println("queue elements: ");
+        while (!queue.isEmpty()) {
+            System.out.println(queue.poll());
+        }
+
+        MyStack<Integer> stack = new MyStack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        System.out.println("\nstack size: " + stack.size());
+        System.out.println("stack elements: ");
+        while (!stack.isEmpty()) {
+            System.out.println(stack.pop());
+        }
     }
 }
