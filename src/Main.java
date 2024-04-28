@@ -40,5 +40,15 @@ public class Main {
         while (!stack.isEmpty()) {
             System.out.println(stack.pop());
         }
+
+        Integer[] arr = {1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17};
+        MyMinHeap<Integer> heap = new MyMinHeap<>(arr);
+        heap.printHeap();
+
+        System.out.println("min element:  " + heap.getMin());
+        System.out.println("extract min element: " + heap.extractMin());
+        heap.printHeap();
+        }
+
     }
 }
